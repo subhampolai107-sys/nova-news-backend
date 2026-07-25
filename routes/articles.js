@@ -32,6 +32,16 @@ router.get('/', async (req, res) => {
   }
 });
 
+// TRENDING - Latest 5 articles (must stay BEFORE the /:id route below)
+router.get('/trending', async (req, res) => {
+  try {
+    const trending = await Article.find().sort({ createdAt: -1 }).limit(5);
+    res.json(trending);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 // READ - Ek specific article dekho by ID
 router.get('/:id', async (req, res) => {
   try {
