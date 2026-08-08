@@ -32,6 +32,15 @@ router.get('/', async (req, res) => {
   }
 });
 
+router.get('/author/:name', async (req, res) => {
+  try {
+    const articles = await Article.find({ author: req.params.name }).sort({ createdAt: -1 });
+    res.json(articles);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 // TRENDING - Latest 5 articles (must stay BEFORE the /:id route below)
 router.get('/trending', async (req, res) => {
   try {
