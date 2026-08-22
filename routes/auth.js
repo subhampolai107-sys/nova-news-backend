@@ -39,4 +39,15 @@ router.post('/login', async (req, res) => {
   }
 });
 
+const User = require('../models/User');
+
+router.get('/count', async (req, res) => {
+  try {
+    const totalUsers = await User.countDocuments();
+    res.json({ totalUsers });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 module.exports = router;
