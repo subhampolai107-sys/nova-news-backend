@@ -39,8 +39,7 @@ router.post('/login', async (req, res) => {
   }
 });
 
-const User = require('../models/User');
-
+// USER COUNT route (for analytics)
 router.get('/count', async (req, res) => {
   try {
     const totalUsers = await User.countDocuments();
